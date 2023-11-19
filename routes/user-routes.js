@@ -37,22 +37,27 @@ routes.post('/create', async (req,res,next)=>{
 })
 routes.post('/login', async (req,res,next)=>{
   
- const {username, password} = req.body;
+ const {email, password} = req.body;
 
- const user = await User.findOne({username})
+ const user = await User.findOne({email})
  
  if(user){
      console.log(user)
-    console.log(password, user.password)
+    console.log('user: ',password, user.password)
     comparePassword(password, user.password).then((val)=>{
-        res.status(200).send({message: 'login successful',user})
+        if(val == true){
+
+            res.status(200).send({message: 'login successful',user})
+        }else{
+            res.status(404).send({message: 'Invalid password'})
+        }
     }).catch((err)=>{
         res.status(501).send({err})
     })
     // console.log(passwordMatch)
     
  }else{
-    res.send('Invalid Login')
+    res.send('Invalid username and password')
  }
 })
 
