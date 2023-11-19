@@ -7,6 +7,10 @@ const db = require('./db')
 app.use(express.json())
 app.use(express.urlencoded)
 
+app.use('/user/:username/:email',(req,res,next)=>{
+    
+})
+
 app.get('/', function(req, res){
     res.send(db());
 })
