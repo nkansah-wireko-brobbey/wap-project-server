@@ -5,22 +5,33 @@ const {hashPassword,comparePassword} = require('../utils/encryptionHandler')
 
 let routes = express.Router({"caseSensitive":false,"strict":false})
 
-routes.post('/create',(req,res,next)=>{
-  
-   hashPassword(req.body.password).then((val)=>{
-    const newUser = new User({
-        username: req.body.username,
-        email: req.body.email,
-        password: val
-    })
-    newUser.save()
-        .then((savedUser)=>{ res.status(201).json(savedUser)})
-        .catch((error)=>{res.status(500).json(error)})
+routes.post('/create', async (req,res,next)=>{
+    const {username, password, email} = req.body;
 
-    }).catch((err)=>{
-        console.log('Error',err)
-        res.status(500).json(err)
-    })
+    const user = await User.findOne({email})
+
+    if(user){
+
+        res.status(409).json({message: "User already exists"})
+
+    }else{
+
+        hashPassword(req.body.password).then((val)=>{
+         const newUser = new User({
+             username: req.body.username,
+             email: req.body.email,
+             password: val
+         })
+         newUser.save()
+             .then((savedUser)=>{ res.status(201).json(savedUser)})
+             .catch((error)=>{res.status(500).json(error)})
+     
+         }).catch((err)=>{
+             console.log('Error',err)
+             res.status(500).json(err)
+         })
+    }
+  
     
     
 })
