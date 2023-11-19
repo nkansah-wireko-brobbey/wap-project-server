@@ -1,0 +1,28 @@
+POST http://localhost:4000/user/create
+content-type: application/json
+
+{
+    "username": "billy",
+    "email": "billy@gmail.com",
+    "password": "password"
+}
+
+
+###
+
+
+GET http://localhost:4000/user
+
+
+###
+
+POST http://localhost:4000/user/login
+content-type: application/json
+
+{
+    "username": "billy",
+    "email": "billy@gmail.com",
+    "password": "password"
+}
+
+
