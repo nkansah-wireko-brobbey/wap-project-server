@@ -1,0 +1,33 @@
+
+POST http://localhost:4000/profile/create
+content-type: application/json
+
+{
+    "description": "description",
+    "school": "MIU",
+    "userId": "655a5b49f03166a3b186acc1",
+    "skills": ["Java"],
+    "mobile": "mobile"
+}
+
+
+
+###
+
+
+
+GET http://localhost:4000/skills/
+
+
+
+###
+
+
+POST http://localhost:4000/skills/create
+Content-Type: application/json
+
+{
+    "skill" : "JavaScript"
+}
+
+

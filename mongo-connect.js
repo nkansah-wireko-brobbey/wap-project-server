@@ -7,7 +7,7 @@ let uri = process.env.MONGO_URI || 'mongodb+srv://wirekobrobbeyofficial:xTbh7E4g
 
 const connectDB = async () => {
     try {
-        const conn = await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+        const conn = await mongoose.connect(uri)
         console.log(`Mongo connected at: ${conn.connection.host}`)
         
     } catch (error) {

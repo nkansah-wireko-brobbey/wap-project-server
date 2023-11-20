@@ -14,7 +14,10 @@ content-type: application/json
 GET http://localhost:4000/user
 
 
+
 ###
+
+
 
 POST http://localhost:4000/user/login
 content-type: application/json
@@ -24,5 +27,23 @@ content-type: application/json
     "email": "billy@gmail.com",
     "password": "password"
 }
+
+
+
+###
+
+
+
+POST http://localhost:4000/profile/create
+content-type: application/json
+
+{
+    "description": "description",
+    "school": "MIU",
+    "userId": "655a5b49f03166a3b186acc1",
+    "skills": ["Java"],
+    "mobile": "mobile"
+}
+
 
 
