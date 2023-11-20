@@ -52,12 +52,12 @@ routes.post('/login', async (req,res,next)=>{
             res.status(404).send({message: 'Invalid password'})
         }
     }).catch((err)=>{
-        res.status(501).send({err})
+        res.status(501).send({message:err.message})
     })
     // console.log(passwordMatch)
     
  }else{
-    res.send('Invalid username and password')
+    res.status(404).send({message:'Invalid username and password'})
  }
 })
 
