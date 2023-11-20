@@ -34,31 +34,17 @@ routes.post('/create', async (req,res,next)=>{
   
     
 })
-// routes.patch('/update', async (req,res,next)=>{
-  
-//  const {email, password} = req.body;
+routes.get('/findOne/:id',async (req,res,next)=>{
 
-//  const user = await User.findOne({email})
- 
-//  if(user){
-//      console.log(user)
-//     console.log('user: ',password, user.password)
-//     comparePassword(password, user.password).then((val)=>{
-//         if(val == true){
+    const profile = await Profile.findOne({userId: req.params.id})
 
-//             res.status(200).send({message: 'login successful',user})
-//         }else{
-//             res.status(404).send({message: 'Invalid password'})
-//         }
-//     }).catch((err)=>{
-//         res.status(501).send({message:err.message})
-//     })
-//     // console.log(passwordMatch)
-    
-//  }else{
-//     res.status(404).send({message:'Invalid username and password'})
-//  }
-// })
+    if(profile){
+        res.status(200).json(profile)
+    }else{
+        res.status(404).json({message: "User not found"})
+    }
+
+})
 
 
 
