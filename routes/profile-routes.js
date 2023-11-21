@@ -45,6 +45,7 @@ routes.get('/findOne/:id',async (req,res,next)=>{
     }
 
 })
+
 routes.get('/findWithSkill/:skill', async (req, res, next) => {
     const skillToSearch = req.params.skill;
   
@@ -88,7 +89,7 @@ routes.get('/findWithSkill/:skill', async (req, res, next) => {
 
 routes.get('/all',async (req,res,next)=>{
 
-    const profile = await Profile.find()
+    const profile = await Profile.find().populate('userId', '-password -__v -date')
 
     if(profile){
         res.status(200).json(profile)
