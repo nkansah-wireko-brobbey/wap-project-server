@@ -36,7 +36,59 @@ routes.post('/create', async (req,res,next)=>{
 })
 routes.get('/findOne/:id',async (req,res,next)=>{
 
-    const profile = await Profile.findOne({userId: req.params.id})
+    const profile = await Profile.findOne({userId: req.params.id}).populate('userId', '-password -__v -date')
+
+    if(profile){
+        res.status(200).json(profile)
+    }else{
+        res.status(404).json({message: "User not found"})
+    }
+
+})
+routes.get('/findWithSkill/:skill', async (req, res, next) => {
+    const skillToSearch = req.params.skill;
+  
+    try {
+      const profilesWithUsernames = await Profile.aggregate([
+        {
+          $match: { skills: skillToSearch } // Filter profiles based on the skill
+        },
+        {
+          $lookup: {
+            from: 'users', // Target collection (users)
+            localField: 'userId',
+            foreignField: '_id',
+            as: 'userData'
+          }
+        },
+        {
+          $unwind: '$userData' // Unwind the array created by $lookup
+        },
+        {
+          $project: {
+            _id: 0,
+            userId: 0,
+            'userData._id': 0,
+            'userData.password': 0,
+            'userData.date': 0,
+            'userData.__v': 0
+          }
+        }
+      ]);
+      console.log(profilesWithUsernames); // Add this line for debugging
+
+  
+      res.status(200).json(profilesWithUsernames);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+
+
+routes.get('/all',async (req,res,next)=>{
+
+    const profile = await Profile.find()
 
     if(profile){
         res.status(200).json(profile)

@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 
 const profileSchema = new mongoose.Schema({
-  userId: { 
-    type: String, 
-    required: true },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId, // Use ObjectId for referencing users
+    ref: 'users', // Reference the 'users' collection
+    required: true,
+  },
     skills: { 
     type: [String], 
     required: true },
@@ -21,6 +23,6 @@ const profileSchema = new mongoose.Schema({
     default: Date.now },
 });
 
-const profile = mongoose.model('profile', profileSchema);
+const profile = mongoose.model('profiles', profileSchema);
 
 module.exports = profile

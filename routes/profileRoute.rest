@@ -37,3 +37,15 @@ Content-Type: application/json
 GET http://localhost:4000/profile/findOne/655a5b49f03166a3b186acc1
 
 
+
+###
+
+
+GET http://localhost:4000/profile/all
+
+
+###
+
+
+GET http://localhost:4000/profile/findWithSkill/Java
+
