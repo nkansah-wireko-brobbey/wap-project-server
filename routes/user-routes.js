@@ -1,6 +1,7 @@
 const express = require('express')
 const User = require('../models/userSchema')
 const {hashPassword,comparePassword} = require('../utils/encryptionHandler')
+const {sendSignUpMail} = require('../utils/mailer')
 
 
 let routes = express.Router({"caseSensitive":false,"strict":false})
@@ -15,6 +16,7 @@ routes.post('/create', async (req,res,next)=>{
         res.status(409).json({message: "User already exists"})
 
     }else{
+        const resMail = await sendSignUpMail(req.body.email, req.body.username)
 
         hashPassword(req.body.password).then((val)=>{
          const newUser = new User({
@@ -23,7 +25,8 @@ routes.post('/create', async (req,res,next)=>{
              password: val
          })
          newUser.save()
-             .then((savedUser)=>{ res.status(201).json(savedUser)})
+             .then((savedUser)=>{ 
+                res.status(201).json(savedUser)})
              .catch((error)=>{res.status(500).json(error)})
      
          }).catch((err)=>{

@@ -45,6 +45,25 @@ const mailOptions = {
   }
 
 }
+async function sendSignUpMail(recipient,username){
+
+    // Email content
+const mailOptions = {
+    from: 'wirekobrobbeyofficial@gmail.com',
+    to: `${recipient}`,
+    subject: ' Congratulations on Signing Up!',
+    text: `Hi ${username}, Congratulations on signing up! 🎉 We're thrilled to have you join SkillsApp. Explore exciting opportunities, features, and a supportive community. Need assistance? We're here to help! 🎉🎉Best`
+  };
+
+  try{
+      const response = await transporter.sendMail(mailOptions)
+      const info = response
+      return info;
+  }catch(err){
+      console.log(err)
+  }
+
+}
 
 // async function send(){
 //    await sendConnectMail('wirekobrobbey27@gmail.com').then((info)=>{
@@ -53,4 +72,4 @@ const mailOptions = {
 //     // console.log(res)
 // }
 // send()
-module.exports = {sendConnectMail}
+module.exports = {sendConnectMail,sendSignUpMail}
