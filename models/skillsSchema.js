@@ -7,6 +7,9 @@ const skillsSchema = new mongoose.Schema({
     description: { 
     type: String, 
     required: false },
+    img: { 
+    type: String, 
+    required: false },
     date: { 
     type: Date,
     default: Date.now },

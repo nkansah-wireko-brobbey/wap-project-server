@@ -45,6 +45,17 @@ routes.get('/findOne/:id',async (req,res,next)=>{
     }
 
 })
+routes.get('/findProfile/:id',async (req,res,next)=>{
+
+    const profile = await Profile.findOne({_id: req.params.id}).populate('userId', '-password -__v -date')
+
+    if(profile){
+        res.status(200).json(profile)
+    }else{
+        res.status(404).json({message: "User not found"})
+    }
+
+})
 
 routes.get('/findWithSkill/:skill', async (req, res, next) => {
     const skillToSearch = req.params.skill;
@@ -69,7 +80,6 @@ routes.get('/findWithSkill/:skill', async (req, res, next) => {
           $project: {
             _id: 0,
             userId: 0,
-            'userData._id': 0,
             'userData.password': 0,
             'userData.date': 0,
             'userData.__v': 0

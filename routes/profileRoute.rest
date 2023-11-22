@@ -27,7 +27,8 @@ POST http://localhost:4000/skills/create
 Content-Type: application/json
 
 {
-    "skill" : "React Native"
+    "skill" : "SQL",
+    "img":"https://tipa.in/wp-content/uploads/2021/05/Online-courses.jpg"
 }
 
 
@@ -49,3 +50,14 @@ GET http://localhost:4000/profile/all
 
 GET http://localhost:4000/profile/findWithSkill/Java
 
+
+###
+
+
+POST http://localhost:4000/mailer/
+Content-Type: application/json
+
+{
+    "sender": "655a5b49f03166a3b186acc1",
+    "recipient": "655a5b49f03166a3b186acc1"
+}

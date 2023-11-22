@@ -8,6 +8,7 @@ const db = require('./mongo-connect')
 const userRoutes = require('./routes/user-routes')
 const profileRoutes = require('./routes/profile-routes')
 const skillsRoutes = require('./routes/skills-routes')
+const mailerRoutes = require('./routes/mailer-route')
 
 
 db()
@@ -18,6 +19,7 @@ app.use(express.urlencoded({extended: false}))
 app.use('/user', userRoutes)
 app.use('/profile', profileRoutes)
 app.use('/skills', skillsRoutes)
+app.use('/mailer', mailerRoutes)
 
 app.get('/', function(req, res){ 
     res.send(db());

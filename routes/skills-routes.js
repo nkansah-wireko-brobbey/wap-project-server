@@ -15,7 +15,7 @@ routes.get('/', (req,res,next)=>{
 
 })
 routes.post('/create',async (req,res,next)=>{
-    const {skill} = req.body
+    const {skill,img} = req.body
 
     console.log(req.body)
 
@@ -25,7 +25,8 @@ routes.post('/create',async (req,res,next)=>{
         res.status(409).send({Message: "Skill already exitst"})
     }else{
         const newSkill = new Skills({
-            skill: skill
+            skill: skill,
+            img: img
         })
         newSkill.save()
             .then((savedSkill)=>{ res.status(201).json(savedSkill)})
